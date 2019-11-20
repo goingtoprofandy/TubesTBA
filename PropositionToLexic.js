@@ -1,3 +1,4 @@
+// State Group For Tokenize
 var states = [
   ['p', 'q', 'r', 's'],
   ['not'], 
@@ -11,6 +12,7 @@ var states = [
   [')']
 ];
 
+// Split Data Input With Delimeter " "
 function splitDataWithSpace(data) {
   var newData = [];
   var temp = "";
@@ -27,22 +29,34 @@ function splitDataWithSpace(data) {
   return newData;
 }
 
+// Encode Data From Input To Token Lexic
 function encodeToLexic(data) {
   var cleanData = splitDataWithSpace(data);
   var encodeData = cleanData.map(function(item) {
-    var temp = 0;
+    var temp = -1;
     states.forEach(function(params, index) {
       var status = false;
       for (var i = 0; i < params.length; i++) {
         status = stateValidation(params[i], item)
+        if (status) break;
       }
       if (status) temp = index;
     });
-    return (temp + 1);
+    return (temp != -1) ? (temp + 1) : -1;
   });
-  console.log(encodeData);
+  
+  var lexicFixed = []
+  for (var i = 0; i < encodeData.length; i++) {
+    if (encodeData[i] != -1) lexicFixed.push(encodeData[i])
+    else {
+      lexicFixed.push("Error");
+      break;
+    }
+  }
+  return lexicFixed;
 }
 
+// Check Is Validate For State Or Not
 function stateValidation(data, inputs) {
   var status = true;
   if (data.length == inputs.length) {
@@ -59,6 +73,8 @@ function stateValidation(data, inputs) {
   return status;
 }
 
+// Check Is Validate From Tokenize
+
 // Main
-var input = "p and q or r";
+var input = "p ( not r iff q )";
 encodeToLexic(input);
