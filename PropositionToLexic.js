@@ -34,13 +34,29 @@ function encodeToLexic(data) {
     states.forEach(function(params, index) {
       var status = false;
       for (var i = 0; i < params.length; i++) {
-        if (params[i] == item) status = true;
+        status = stateValidation(params[i], item)
       }
       if (status) temp = index;
     });
     return (temp + 1);
   });
   console.log(encodeData);
+}
+
+function stateValidation(data, inputs) {
+  var status = true;
+  if (data.length == inputs.length) {
+    for (var i = 0; i < inputs.length; i++) {
+      if (data[i] != inputs[i]) {
+        status = false;
+        break;
+      }
+    }
+  }
+  else {
+    status = false;
+  }
+  return status;
 }
 
 // Main
