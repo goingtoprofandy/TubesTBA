@@ -13,7 +13,6 @@ var states = [
 ];
 
 console.log(states[1][0]);
-
 function splitDataWithSpace(data) {
   var newData = [];
   var temp = '';
