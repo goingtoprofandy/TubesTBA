@@ -33,8 +33,11 @@ function removeSpace(data) {
 
   for (let index = 0; index < newData.length; index++) {
     const element = newData[index];
+    console.log(element);
     if (element.length == 1) {
       if (operand[0].includes(element)) datas.push(1);
+      else if (operand.includes(element))
+        datas.push(operand.indexOf(element) + 1);
       else break;
     } else if (operand.includes(element)) {
       const tokenMin1 = operand.indexOf(element);
@@ -45,5 +48,4 @@ function removeSpace(data) {
   console.log(datas);
 }
 
-removeSpace('p or or p');
-// removeSpace('pq and rs');
+removeSpace('not ( p )');
