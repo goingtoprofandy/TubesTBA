@@ -1,28 +1,28 @@
 // State Group For Tokenize
 var states = [
   ['p', 'q', 'r', 's'],
-  ['not'], 
-  ['and'], 
-  ['or'], 
-  ['xor'], 
+  ['not'],
+  ['and'],
+  ['or'],
+  ['xor'],
   ['iff'],
-  ['if'], 
+  ['if'],
   ['then'],
-  ['('], 
+  ['('],
   [')']
 ];
 
-// Split Data Input With Delimeter " "
+console.log(states[1][0]);
 function splitDataWithSpace(data) {
   var newData = [];
-  var temp = "";
+  var temp = '';
   for (var i = 0; i < data.length; i++) {
-    if (data[i] != " ") temp += data[i];
+    if (data[i] != ' ') temp += data[i];
     else {
       newData.push(temp);
-      temp = "";
+      temp = '';
     }
-    if (i == (data.length - 1)) {
+    if (i == data.length - 1) {
       newData.push(temp);
     }
   }
@@ -37,19 +37,18 @@ function encodeToLexic(data) {
     states.forEach(function(params, index) {
       var status = false;
       for (var i = 0; i < params.length; i++) {
-        status = stateValidation(params[i], item)
-        if (status) break;
+        status = stateValidation(params[i], item);
       }
       if (status) temp = index;
     });
-    return (temp != -1) ? (temp + 1) : -1;
+    return temp + 1;
   });
-  
-  var lexicFixed = []
+
+  var lexicFixed = [];
   for (var i = 0; i < encodeData.length; i++) {
-    if (encodeData[i] != -1) lexicFixed.push(encodeData[i])
+    if (encodeData[i] != -1) lexicFixed.push(encodeData[i]);
     else {
-      lexicFixed.push("Error");
+      lexicFixed.push('Error');
       break;
     }
   }
@@ -66,8 +65,7 @@ function stateValidation(data, inputs) {
         break;
       }
     }
-  }
-  else {
+  } else {
     status = false;
   }
   return status;
@@ -76,5 +74,5 @@ function stateValidation(data, inputs) {
 // Check Is Validate From Tokenize
 
 // Main
-var input = "p ( not r iff q )";
+var input = 'p and q or r';
 encodeToLexic(input);
