@@ -1,26 +1,28 @@
 var states = [
   ['p', 'q', 'r', 's'],
-  ['not'], 
-  ['and'], 
-  ['or'], 
-  ['xor'], 
+  ['not'],
+  ['and'],
+  ['or'],
+  ['xor'],
   ['iff'],
-  ['if'], 
+  ['if'],
   ['then'],
-  ['('], 
+  ['('],
   [')']
 ];
 
+console.log(states[1][0]);
+
 function splitDataWithSpace(data) {
   var newData = [];
-  var temp = "";
+  var temp = '';
   for (var i = 0; i < data.length; i++) {
-    if (data[i] != " ") temp += data[i];
+    if (data[i] != ' ') temp += data[i];
     else {
       newData.push(temp);
-      temp = "";
+      temp = '';
     }
-    if (i == (data.length - 1)) {
+    if (i == data.length - 1) {
       newData.push(temp);
     }
   }
@@ -34,11 +36,11 @@ function encodeToLexic(data) {
     states.forEach(function(params, index) {
       var status = false;
       for (var i = 0; i < params.length; i++) {
-        status = stateValidation(params[i], item)
+        status = stateValidation(params[i], item);
       }
       if (status) temp = index;
     });
-    return (temp + 1);
+    return temp + 1;
   });
   console.log(encodeData);
 }
@@ -52,13 +54,12 @@ function stateValidation(data, inputs) {
         break;
       }
     }
-  }
-  else {
+  } else {
     status = false;
   }
   return status;
 }
 
 // Main
-var input = "p and q or r";
+var input = 'p and q or r';
 encodeToLexic(input);
